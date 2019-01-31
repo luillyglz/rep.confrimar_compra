@@ -1,0 +1,34 @@
+<odoo>
+  <data>
+    <!--codigo para modifcar atributos y bloquear agregar producto cuando confirmas-->
+    <record id="inherit_readonly_purcharse" model="ir.ui.view">
+    <field name="name">Validation.purchase</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form" ></field>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name ='order_line']" position="attributes">
+          <attribute name="attrs">{'readonly': [('state','in',('done', 'cancel','purchase'))]}</attribute>
+        </xpath>
+      </data>
+     </field>
+  </record>
+
+ <!--codifo para ventas--> 
+
+     <record id="inherit_readonly_sale" model="ir.ui.view">
+    <field name="name">Validation.sale</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form" ></field>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name ='order_line']" position="attributes">
+          <attribute name="attrs">{'readonly': ('state','in',('done', 'cancel','sale'))]}</attribute>
+        </xpath>
+      </data>
+     </field>
+  </record>
+
+
+</data>
+</odoo>
